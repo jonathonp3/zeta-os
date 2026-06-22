@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "🚀 Starting Wolf-OS PIA Assembly..."
+echo "🚀 Starting Zeta-OS PIA Assembly..."
 
 # --- 1: IDENTITY (Universal Family Blueprint) ---
 mkdir -p /usr/lib/sysusers.d
@@ -79,5 +79,5 @@ chmod 755 /usr/libexec/piavpn/opt/piavpn/bin/piactl
 
 systemctl enable libvirtd.service virtlogd.service piavpn.service docker.service sshd.service
 
-echo "✅ Wolf-OS Custom Assembly Complete! Ready for Deployment."
+echo "✅ Zeta-OS Custom Assembly Complete! Ready for Deployment."
 
