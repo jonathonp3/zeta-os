@@ -1,7 +1,7 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/jonathonp3/Zeta-Reticuli
-name: zeta-reticuli
+name: zeta-os
 # description will be included in the image's metadata
 description: This is my personal OS image.
 
@@ -17,10 +17,10 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  # from-file: ../modules/repository.yml
+  - from-file: ../modules/repository.yml
   
-  # from-file: ../modules/packages.yml
-
+  - from-file: ../modules/packages.yml
+  
   # from-file: ../modules/default-flatpaks.yml
 
   # from-file: ../modules/systemd.yml
@@ -30,6 +30,10 @@ modules:
   # from-file: ../modules/script.yml
 
   # from-file: ../modules/fonts.yml 
-
+  
+    # Run the PIA assembly script (Post-install logic)
+  - type: script
+    scripts:
+      - setup-zeta-os.sh
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

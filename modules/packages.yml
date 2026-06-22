@@ -7,15 +7,12 @@ install:
   # libreoffice
   - pluma
   # rhythmbox
-  - samba
-  - samba-client
+  # samba
+  # samba-client
   # simple-scan
   # syncthing
   # vlc
-  # yt-dlp
-  
-  ## Snaps run sudo snap install snap-store and sudo mkdir /var/lib/snapd/void before installing snaps to avoid error after os installation
-  # snapd 
+  - yt-dlp
   
   ## Virt-Manager
   - libvirt-daemon-kvm
@@ -30,3 +27,16 @@ install:
   - containerd.io
   - docker-buildx-plugin
   - docker-compose-plugin
+  
+    # PIA
+  - libnsl
+  - libxcrypt-compat
+  - nss-tools
+  - xterm
+  - libXaw
+  - libutempter
+  - mkfontscale
+  - xorg-x11-fonts-misc
+  - libxkbcommon-x11
+  - wget2
+

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
 type: script
 snippets:
-  - setsebool -P samba_enable_home_dirs on
-  - setsebool -P use_nfs_home_dirs 1
+  # setsebool -P samba_enable_home_dirs on
+

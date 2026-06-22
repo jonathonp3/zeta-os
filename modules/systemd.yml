@@ -2,11 +2,9 @@
 type: systemd
 system:
   enabled:
-    - libvirtd.service
-    - nfs-server.service
-    - rpcbind.service
-    - smb.service
-    # snapd.service
-    - sshd.service
-    - docker.service
+    # libvirtd.service
+    # smd.service
+    # nmb.service
+    # sshd.service
+    # docker.service
   user: {}  # Also add Flathub user repo, but no user packages

@@ -1,43 +1,82 @@
-# Zeta-Reticuli &nbsp; [![bluebuild build badge](https://github.com/jonathonp3/zeta-reticuli/actions/workflows/build.yml/badge.svg)](https://github.com/jonathonp3/zeta-reticuli/actions/workflows/build.yml)
+# Zeta-OS
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+Zeta-OS is my personal OS image built from [Bazzite](https://github.com/ublue-os/bazzite/) with Private Internet Access (PIA) integrated into the image. It also includes a full virtualization stack, including Docker.
 
-After setup, it is recommended you update this README to describe your custom image.
+## Components
+- [Bazzite](https://bazzite.gg/)
+- [Private Internet Access (PIA)](https://www.privateinternetaccess.com)s
+- Virtualization stack (Docker)
+
+## License
+See `LICENSE`.
+
 
 ## Installation
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+These instructions are for my family only. The image is designed to be read-only and is intended for personal use, so it isn’t set up for others to use or customise.
 
-To rebase an existing atomic Fedora installation to the latest build:
+If you want to try my PIA integration on Silverblue, see:
+https://github.com/jonathonp3/wolf-os
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/jonathonp3/zeta-reticuli:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/jonathonp3/zeta-reticuli:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+The PIA GUI is configured to run with UID/GID **1000** (the default group for a new Fedora installation).
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
 
-## ISO
+The first step is to rebase from Fedora Silverblue:
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+1. Rebase to the unsigned image:
+```bash
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/jonathonp3/zeta-os:latest
+```
 
-## Verification
+2. Reboot to complete the rebase:
+```bash
+systemctl reboot
+```
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+3. Then rebase to the signed image, like so:
+```bash
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/jonathonp3/zeta-os:latest
+```
+
+4. Reboot again to complete the installation
+```bash
+systemctl reboot
+```
+
+5. Upgrade to the latest build
+```bash
+rpm-ostree upgrade
+```
+
+6. Check status
+```bash
+rpm-ostree status
+```
+
+## How to build an ISO
+
+1. Create the installer runtime:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/jonathonp3/zeta-reticuli
+podman run --pull always --rm ghcr.io/blue-build/cli:latest-installer | bash
+```
+
+2. Generate the ISO from the repository image:
+```bash
+sudo bluebuild generate-iso --iso-name zeta-os iso image ghcr.io/jonathonp3/zeta-os:latest
+```
+
+
+## How to revert back to the stock Bazzite image:
+
+1: Rebase to unsigned official Bazzite image:
+```bash
+sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/bazzite-gnome:stable
+sudo systemctl reboot
+```
+
+2. Step 2: Rebase to signed official Bazzite image
+```bash
+sudo rpm-ostree rebase ostree-image-signed:docker://ghcr.io/ublue-os/bazzite-gnome:stable
+sudo systemctl reboot
 ```
