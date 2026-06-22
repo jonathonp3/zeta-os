@@ -1,41 +1,31 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/jonathonp3/Zeta-Reticuli
 name: zeta-os
-# description will be included in the image's metadata
-description: This is my personal OS image.
+description: My personal Bazzite-based OS image for the family.
 
-# the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite-gnome
-image-version: latest # latest is also supported if you want new updates ASAP
+image-version: latest
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
+  # MISSION 1: File Overlays (Bazzite/Wolf-OS style)
   - type: files
     files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-        
-  # Ensure the tarball is placed in the build environment
-  - source: tmp/pia-backup.tar.xz
-    destination: /tmp/pia-backup.tar.xz        
+      - source: etc
+        destination: /etc
+      - source: usr
+        destination: /usr
+      - source: tmp/pia-backup.tar.xz
+        destination: /tmp/pia-backup.tar.xz        
 
+  # MISSION 2: Modular Repos and Packages
   - from-file: ../modules/repository.yml
-  
   - from-file: ../modules/packages.yml
   
-  # from-file: ../modules/default-flatpaks.yml
-
-  # from-file: ../modules/systemd.yml
-  
-  # from-file: ../modules/gnome-extensions.yml
-  
-  # from-file: ../modules/fonts.yml 
-  
-    # Run the PIA assembly script (Post-install logic)
+  # MISSION 3: Custom Assembly (The Script)
   - type: script
     scripts:
       - setup-zeta-os.sh
 
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  # MISSION 4: Security
+  - type: signing
+
