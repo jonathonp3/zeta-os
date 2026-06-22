@@ -33,7 +33,7 @@ rpm-ostree rebase ostree-unverified-registry:ghcr.io/jonathonp3/zeta-os:latest
 systemctl reboot
 ```
 
-3. Then rebase to the signed image, like so:
+3. Rebase to the signed image:
 ```bash
 rpm-ostree rebase ostree-image-signed:docker://ghcr.io/jonathonp3/zeta-os:latest
 ```
@@ -66,16 +66,15 @@ podman run --pull always --rm ghcr.io/blue-build/cli:latest-installer | bash
 sudo bluebuild generate-iso --iso-name zeta-os.iso image ghcr.io/jonathonp3/zeta-os:latest
 ```
 
-
 ## How to revert back to the stock Bazzite image:
 
-1: Rebase to unsigned official Bazzite image:
+1. Rebase to unsigned official Bazzite image:
 ```bash
 sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/bazzite-gnome:stable
 sudo systemctl reboot
 ```
 
-2. Step 2: Rebase to signed official Bazzite image
+2. Rebase to signed official Bazzite image
 ```bash
 sudo rpm-ostree rebase ostree-image-signed:docker://ghcr.io/ublue-os/bazzite-gnome:stable
 sudo systemctl reboot
