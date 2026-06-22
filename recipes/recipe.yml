@@ -16,6 +16,10 @@ modules:
     files:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+        
+  # Ensure the tarball is placed in the build environment
+  - source: tmp/pia-backup.tar.xz
+    destination: /tmp/pia-backup.tar.xz        
 
   - from-file: ../modules/repository.yml
   
@@ -27,8 +31,6 @@ modules:
   
   # from-file: ../modules/gnome-extensions.yml
   
-  # from-file: ../modules/script.yml
-
   # from-file: ../modules/fonts.yml 
   
     # Run the PIA assembly script (Post-install logic)
