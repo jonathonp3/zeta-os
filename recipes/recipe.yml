@@ -7,7 +7,8 @@ base-image: ghcr.io/ublue-os/bazzite-gnome
 image-version: latest
 
 modules:
-  # 1.File Overlays (Bazzite/Wolf-OS style)
+  # 1. THE CONSOLIDATED OVERLAY
+  # Everything in your 'files/' folder is mapped here
   - type: files
     files:
       - source: etc
@@ -18,16 +19,15 @@ modules:
         destination: /tmp/pia-backup.tar.xz
       - source: usr/share/gtksourceview-5/styles
         destination: /usr/share/gtksourceview-5/styles
+      # Nest inside the 'files' module
+      - source: usr/libexec/wolf-os-firstboot.sh
+        destination: /usr/libexec/wolf-os-firstboot.sh
+      - source: usr/lib/systemd/system/wolf-os-cleanup.service
+        destination: /usr/lib/systemd/system/wolf-os-cleanup.service  
 
-  # 2.Modular Repos and Packages
+  # 2. Modular Repos and Packages
   - from-file: ../modules/repository.yml
   - from-file: ../modules/packages.yml
-  # Remove gnome-text-editor flatpak on boot (using custom rpm)
-  - source: usr/libexec/wolf-os-firstboot.sh
-    destination: /usr/libexec/wolf-os-firstboot.sh
-  - source: usr/lib/systemd/system/wolf-os-cleanup.service
-    destination: /usr/lib/systemd/system/wolf-os-cleanup.service  
-  
   
   # 3: Custom Assembly (The Script)
   - type: script

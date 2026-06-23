@@ -106,7 +106,7 @@ EOF
 glib-compile-schemas /usr/share/glib-2.0/schemas/
 
 # --- 8. FINALIZE --- 
-systemctl enable virtlogd.service piavpn.service docker.service
+systemctl enable virtlogd.service piavpn.service sshd.service docker.service wolf-os-cleanup.service
 
 echo "✅ Zeta-OS Custom Assembly Complete!"
 
