@@ -7,7 +7,7 @@ base-image: ghcr.io/ublue-os/bazzite-gnome
 image-version: latest
 
 modules:
-  # MISSION 1: File Overlays (Bazzite/Wolf-OS style)
+  # 1.File Overlays (Bazzite/Wolf-OS style)
   - type: files
     files:
       - source: etc
@@ -19,15 +19,21 @@ modules:
       - source: usr/share/gtksourceview-5/styles
         destination: /usr/share/gtksourceview-5/styles
 
-  # MISSION 2: Modular Repos and Packages
+  # 2.Modular Repos and Packages
   - from-file: ../modules/repository.yml
   - from-file: ../modules/packages.yml
+  # Remove gnome-text-editor flatpak on boot (using custom rpm)
+  - source: usr/libexec/wolf-os-firstboot.sh
+    destination: /usr/libexec/wolf-os-firstboot.sh
+  - source: usr/lib/systemd/system/wolf-os-cleanup.service
+    destination: /usr/lib/systemd/system/wolf-os-cleanup.service  
   
-  # MISSION 3: Custom Assembly (The Script)
+  
+  # 3: Custom Assembly (The Script)
   - type: script
     scripts:
       - setup-zeta-os.sh
 
-  # MISSION 4: Security
+  # 4: Security
   - type: signing
 
