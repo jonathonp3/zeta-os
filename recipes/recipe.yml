@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: zeta-os
+name: sirius-os
 description: My personal Bazzite-based OS image for the family.
 
 base-image: ghcr.io/ublue-os/bazzite-gnome
