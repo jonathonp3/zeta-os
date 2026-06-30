@@ -27,7 +27,7 @@ cp /usr/libexec/piavpn/usr/share/applications/piavpn.desktop /usr/share/applicat
 cp /usr/libexec/piavpn/usr/share/pixmaps/piavpn.png /usr/share/pixmaps/piavpn.png
 
 # Create native symlinks in the build's /usr/bin path
-# This makes the commands available system-wide (e.g. typing 'piactl' in terminal)
+# This makes the commands available system-wide ( e.g. by typing 'piactl' in the terminal)
 ln -sf /usr/libexec/piavpn/opt/piavpn/bin/piactl /usr/bin/piactl
 ln -sf /usr/libexec/piavpn/opt/piavpn/bin/pia-daemon /usr/bin/pia-daemon
 ln -sf /usr/libexec/piavpn/opt/piavpn/bin/pia-client /usr/bin/pia-client
@@ -39,7 +39,7 @@ sed -i '/\[Service\]/a WorkingDirectory=/opt/piavpn' /usr/lib/systemd/system/pia
 # --- 4. PERMISSIONS ----
 setcap 'cap_net_bind_service=+ep' /usr/libexec/piavpn/opt/piavpn/bin/pia-unbound || true
 
-# 
+# ADD
 chown root:piavpn /usr/libexec/piavpn/opt/piavpn/bin/pia-client
 chown root:piavpn /usr/libexec/piavpn/opt/piavpn/bin/piactl
 chmod 755 /usr/libexec/piavpn/opt/piavpn/bin/pia-client
