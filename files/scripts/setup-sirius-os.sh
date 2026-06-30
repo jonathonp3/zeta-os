@@ -45,9 +45,6 @@ chown root:piavpn /usr/libexec/piavpn/opt/piavpn/bin/piactl
 chmod 755 /usr/libexec/piavpn/opt/piavpn/bin/pia-client
 chmod 755 /usr/libexec/piavpn/opt/piavpn/bin/piactl
 
-# Ensure clean up script is executable
-chmod +x /usr/libexec/sirius-os-firstboot.sh
-
 # --- 2. WINBOAT AUTO-UPDATE (Safe & Integrated Version) ---
 echo "🚢 Finding latest Winboat..."
 
@@ -113,6 +110,6 @@ echo "⚙️ Setting up First-Boot cleanup service..."
 chmod +x /usr/libexec/sirius-os-firstboot.sh
 
 # --- 5. FINALISE --- 
-systemctl enable libvirtd.service virtlogd.service virtnetworkd.service virtstoraged.service virtnodedevd.socket piavpn.service sshd.service docker.service sirius-os-cleanup.service piavpn-tmpfiles.service
+systemctl enable libvirtd.service virtlogd.service virtnetworkd.service virtstoraged.service virtnodedevd.socket piavpn.service sshd.service docker.service sirius-os-cleanup.service app-tmpfiles.service
 
 echo "✅ Sirius-OS Custom Assembly Complete!"
