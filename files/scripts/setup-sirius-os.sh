@@ -106,6 +106,12 @@ fi
 # Update the Binary Symlink
 ln -sf /usr/libexec/winboat/winboat /usr/bin/winboat 
 
+# --- 7. AUTOMATED CLEANUP ---
+echo "⚙️ Setting up First-Boot cleanup service..."
+
+# Ensure clean up script is executable
+chmod +x /usr/libexec/sirius-os-firstboot.sh
+
 # --- 5. FINALISE --- 
 systemctl enable libvirtd.service virtlogd.service virtnetworkd.service virtstoraged.service virtnodedevd.socket piavpn.service sshd.service docker.service sirius-os-cleanup.service piavpn-tmpfiles.service
 
