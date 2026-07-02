@@ -4,6 +4,10 @@ install:
   - gparted
   # kid3
   # libreoffice
+ 
+  # https://extensions.gnome.org/extension/9558/gnome-wallpaper-engine/
+  - mpv
+  
   - pluma
   # rhythmbox
   # samba
